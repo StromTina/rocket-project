@@ -1,4 +1,7 @@
-console.log("funkar detta?")
-console.log("jo det funkar nog. /cheng");
-console.log("men funkar detta?");
-console.log("hallå");
+import { game } from './game.js'
+import { handleKeyDown, handleKeyUp } from './event.js';
+
+window.addEventListener('keypress', handleKeyDown);
+window.addEventListener('keyup', handleKeyUp);
+
+game.start();
