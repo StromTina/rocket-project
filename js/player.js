@@ -18,10 +18,14 @@ export class Player extends Entity {
     }
 
     draw(game) {
-        game.context.fillStyle = 'black';
-        game.context.fillRect(this.position.x + 15, this.position.y - 32, this.width, this.height);
+        //game.context.fillStyle = 'black';
+        //game.context.fillRect(this.position.x + 15, this.position.y - 32, this.width, this.height);
+        game.context.save();
+        game.context.translate(this.position.x, this.position.y);
         game.context.fill();
         game.context.font = '40px serif';
-        game.context.fillText('🗼', this.position.x, this.position.y);
+        game.context.rotate(-Math.PI/4);
+        game.context.fillText('🚀', 0, 0);
+        game.context.restore();
     }
 }

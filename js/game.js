@@ -11,12 +11,10 @@ class Game {
         this.canvas = canvas;
         this.context = context;
         this.deltaTime = 0;
+        this.spawnTimer = 0;
         this.player1 = new Player(new Position(this.canvas.width * 0.25, this.canvas.height - 20));
         this.player2 = new Player(new Position(this.canvas.width * 0.75, this.canvas.height - 20));
-        this.balls = [
-            new BallFromLeft(new Position(0, Math.floor(Math.random() * (this.canvas.height - 100)))),
-            new BallFromRight(new Position(this.canvas.width, Math.floor(Math.random() * (this.canvas.height - 100))))
-        ]
+        this.balls = [];
     }
 
     start() {
@@ -28,7 +26,7 @@ export const game = new Game(canvas, context);
 
 let tickCount = 0;
 let lastTime = Date.now();
-
+let spawnTimer = 0;
 function tick() {
     let currentTime = Date.now();
     game.deltaTime = (currentTime - lastTime) / 1000;
@@ -36,10 +34,7 @@ function tick() {
 
     tickCount++;
 
-    if(tickCount * game.deltaTime > 20) {
-        tickCount = 0;
-        trueOrFalse();
-    }
+    spawnBall(game);    //will spawn a ball from right side or left side, at random intervals
 
     game.context.fillStyle = 'black';
     game.context.fillRect(0, 0, game.canvas.width, game.canvas.height);
@@ -58,4 +53,22 @@ function tick() {
     requestAnimationFrame(tick);
 }
 
-tick();
+//tick();
+
+function spawnBall(inGame){
+    inGame.spawnTimer += inGame.deltaTime;
+    if(inGame.spawnTimer > 0.2){
+        inGame.spawnTimer = 0;
+        console.log("spawnTime: " + inGame.spawnTimer);
+        if(trueOrFalse()){  //maybe make this one nicer
+            if(trueOrFalse()){
+                inGame.balls.push(new BallFromLeft(new Position(0, Math.floor(Math.random() * (inGame.canvas.height - 100)))));
+            }
+            else{
+                inGame.balls.push(new BallFromRight(new Position(inGame.canvas.width, Math.floor(Math.random() * (inGame.canvas.height - 100)))))
+            }
+        }
+    }
+}
+
+
