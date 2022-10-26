@@ -5,7 +5,7 @@ export class Player extends Entity {
     constructor(position) {
         super(position);
         this.width = 20;
-        this.height = 20;
+        this.height = 40;
         this.up = false;
         this.down = false;
     }
