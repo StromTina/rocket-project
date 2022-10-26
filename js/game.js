@@ -1,4 +1,4 @@
-import { BallFromLeft, BallFromRight } from './ball.js';
+import { BallFromLeft, BallFromRight, ShotFromPlayer1, ShotFromPlayer2 } from './ball.js';
 import { Position } from './entity.js';
 import { Player } from "./player.js";
 import { trueOrFalse } from './utility.js';
@@ -17,6 +17,8 @@ class Game {
         this.player1 = new Player(new Position(this.canvas.width * 0.25, this.canvas.height - 20));
         this.player2 = new Player(new Position(this.canvas.width * 0.75, this.canvas.height - 20));
         this.balls = [];
+        this.player1Shot = new ShotFromPlayer1(new Position(this.player1.position.x, this.player1.position.y));
+        this.player2Shot = new ShotFromPlayer2(new Position(this.player2.position.x, this.player2.position.y));
     }
 
     start() {
@@ -58,8 +60,12 @@ function tick() {
 
     game.player1.tick(game);
     game.player2.tick(game);
+    game.player1Shot.tick(game);
+    game.player2Shot.tick(game);
     game.player1.draw(game);
     game.player2.draw(game);
+    game.player1Shot.draw(game);
+    game.player2Shot.draw(game);
 
     for (let i = 0; i < game.balls.length; i++) {
         let ball = game.balls[i];

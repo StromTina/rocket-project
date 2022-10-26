@@ -1,4 +1,5 @@
 import { Position, Entity } from './entity.js';
+import { ShotFromPlayer1, ShotFromPlayer2 } from './ball.js';
 //import { game } from './game.js';
 
 export class Player extends Entity {
@@ -8,6 +9,8 @@ export class Player extends Entity {
         this.height = 40;
         this.up = false;
         this.down = false;
+        this.shotPlayer1 = false;
+        this.shotPlayer2 = false;
     }
 
     tick(game) {
@@ -15,7 +18,14 @@ export class Player extends Entity {
             this.position.y -= 100 * game.deltaTime;
         } else if (this.down) {
             this.position.y += 100 * game.deltaTime;
+
+        } else if (this.shotPlayer1) {
+            game.player1Shot = new ShotFromPlayer1(new Position(this.position.x, this.position.y));
+
+        } else if (this.shotPlayer2) {
+            game.player2Shot = new ShotFromPlayer2(new Position(this.position.x - 20, this.position.y));
         }
+
 
         if (this.position.y > game.canvas.height - (this.height / 2)) {
             this.position.y = game.canvas.height - (this.height / 2);
@@ -30,9 +40,10 @@ export class Player extends Entity {
         }
     }
 
+
     draw(game) {
-       // game.context.fillStyle = 'white';
-       // game.context.fillRect(this.position.x, this.position.y, this.width, this.height);
+        // game.context.fillStyle = 'white';
+        // game.context.fillRect(this.position.x, this.position.y, this.width, this.height);
         game.context.save();
         game.context.translate(this.position.x, this.position.y);
         //game.context.fill();
