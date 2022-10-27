@@ -27,7 +27,7 @@ class Game {
         this.spawnTimer += this.deltaTime;
         if (this.spawnTimer > 0.2) {
             this.spawnTimer = 0;
-            console.log("spawnTime: " + this.spawnTimer);
+            //console.log("spawnTime: " + this.spawnTimer);
             if (trueOrFalse()) {  //maybe make this one nicer
                 if (trueOrFalse()) {
                     this.balls.push(new BallFromLeft((new Position(0, Math.floor(Math.random() * (this.canvas.height - 100)))), 15));
@@ -92,7 +92,7 @@ function tick() {
         ball.draw(game);
         ball.tick(game);
 
-        if (ball.position.x < 0 || ball.position.x > game.canvas.width) {   //added this to avoid lagging - somehow makes the balls blink(?), maybe fix later?
+        if (ball.position.x < 0 || ball.position.x > game.canvas.width) {
             game.balls.splice(i, 1);
         }
     }
