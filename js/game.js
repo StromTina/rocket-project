@@ -75,6 +75,7 @@ function tick() {
         if (ball.position.x < 0 || ball.position.x > game.canvas.width) {   //added this to avoid lagging - somehow makes the balls blink(?), maybe fix later?
             game.balls.splice(0, 1);
         }
+        console.log(game.balls);
 
     }
 
@@ -98,5 +99,3 @@ function spawnBall(inGame) {
         }
     }
 }
-
-
