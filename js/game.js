@@ -25,7 +25,7 @@ class Game {
 
     spawnBall() {
         this.spawnTimer += this.deltaTime;
-        if (this.spawnTimer > 0.2) {
+        if (this.spawnTimer > 0.3) {
             this.spawnTimer = 0;
             //console.log("spawnTime: " + this.spawnTimer);
             if (trueOrFalse()) {  //maybe make this one nicer
