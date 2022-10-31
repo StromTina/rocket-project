@@ -39,7 +39,7 @@ export class BallFromRight extends Entity {
 
             let distSquared = ((cdx - game.players[i].width / 2) ** 2) + ((cdy - game.players[i].height / 2) ** 2);
             return distSquared <= this.radius ** 2;
-        }
+    }
     }*/
 }
 
