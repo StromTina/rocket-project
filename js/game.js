@@ -75,5 +75,6 @@ function tick() {
         entity.tick(game);
         entity.draw(game);
     }
+
     requestAnimationFrame(tick);
 }
