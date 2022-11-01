@@ -12,7 +12,6 @@ export class Player extends Entity {
         this.shotPlayer2 = false;
     }
     
-
     tick(game) {
         if (this.up) {
             this.position.y -= 150 * game.deltaTime;
@@ -21,13 +20,13 @@ export class Player extends Entity {
         }
 
         if (this.shotPlayer1 && game.shootTimerPlayer1 > 3) {
-            game.balls.push(new BallFromLeft((new Position(this.position.x + 20, this.position.y)), 5));
-            game.players[0].shotPlayer1 = false;
+            game.entities.push(new BallFromLeft((new Position(this.position.x + 20, this.position.y)), 5));
+            game.entities[0].shotPlayer1 = false;
             game.shootTimerPlayer1 = 0;
         }
         if (this.shotPlayer2 && game.shootTimerPlayer2 > 3) {
-            game.balls.push(new BallFromRight((new Position(this.position.x - 20, this.position.y)), 5));
-            game.players[1].shotPlayer2 = false;
+            game.entities.push(new BallFromRight((new Position(this.position.x - 20, this.position.y)), 5));
+            game.entities[1].shotPlayer2 = false;
             game.shootTimerPlayer2 = 0;
         }
 
@@ -43,19 +42,18 @@ export class Player extends Entity {
             game.player2Points++;
         }
 
-        for (let i = 0; i < game.balls.length; i++) {
-            let ball = game.balls[i];
+        for (let i = 2; i < game.entities.length; i++) {
+            let ball = game.entities[i];
 
             if (this.isColliding(ball) && this.position.x < game.canvas.width / 2) {
                 this.position = new Position(game.canvas.width * 0.25, game.canvas.height - 20);
-                game.balls.splice(i, 1);
+                game.entities.splice(i, 1);
             } else if (this.isColliding(ball) && this.position.x > game.canvas.width / 2) {
                 this.position = new Position(game.canvas.width * 0.75, game.canvas.height - 20);
-                game.balls.splice(i, 1);
+                game.entities.splice(i, 1);
             }
         }
     }
-    
 
     isColliding(entity) {
         let cdx = Math.abs(entity.position.x - this.position.x);
