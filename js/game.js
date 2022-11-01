@@ -84,7 +84,9 @@ function tick() {
         entity.draw(game);
     }
 
-
+    if (entity.position.x < 0 || entity.position.x > game.canvas.width) {
+        game.entities.splice(i, 1);
+    }
 
     /*
 
@@ -99,9 +101,6 @@ function tick() {
         ball.draw(game);
         ball.tick(game);
 
-        if (ball.position.x < 0 || ball.position.x > game.canvas.width) {
-            game.balls.splice(i, 1);
-        }
     }*/
     requestAnimationFrame(tick);
 }
