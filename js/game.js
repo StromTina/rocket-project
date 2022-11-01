@@ -1,4 +1,4 @@
-import { BallFromLeft, BallFromRight } from './ball.js';
+import { Ball } from './ball.js';
 import { Position } from './entity.js';
 import { Player } from "./player.js";
 import { trueOrFalse } from './utility.js';
@@ -20,14 +20,6 @@ class Game {
             new Player(new Position(this.canvas.width * 0.25, this.canvas.height - 20)),
             new Player(new Position(this.canvas.width * 0.75, this.canvas.height - 20))
         ];
-
-
-        /*
-        this.players = [
-            new Player(new Position(this.canvas.width * 0.25, this.canvas.height - 20)),
-            new Player(new Position(this.canvas.width * 0.75, this.canvas.height - 20))
-        ];
-        this.balls = [];*/
     }
 
     spawnBall() {
@@ -36,10 +28,10 @@ class Game {
             this.spawnTimer = 0;
             if (trueOrFalse()) {  //maybe make this one nicer
                 if (trueOrFalse()) {
-                    this.entities.push(new BallFromLeft((new Position(0, Math.floor(Math.random() * (this.canvas.height - 100)))), 15));
+                    this.entities.push(new Ball((new Position(0, Math.floor(Math.random() * (this.canvas.height - 100)))), 15, false));
                 }
                 else {
-                    this.entities.push(new BallFromRight((new Position(this.canvas.width, Math.floor(Math.random() * (this.canvas.height - 100)))), 15));
+                    this.entities.push(new Ball((new Position(this.canvas.width, Math.floor(Math.random() * (this.canvas.height - 100)))), 15, true));
                 }
             }
         }
@@ -83,25 +75,5 @@ function tick() {
         entity.tick(game);
         entity.draw(game);
     }
-
-
-
-    /*
-
-    for (let i = 0; i < game.players.length; i++) {
-        let player = game.players[i];
-        player.tick(game);
-        player.draw(game);
-    }
-
-    for (let i = 0; i < game.balls.length; i++) {
-        let ball = game.balls[i];
-        ball.draw(game);
-        ball.tick(game);
-
-        if (ball.position.x < 0 || ball.position.x > game.canvas.width) {
-            game.balls.splice(i, 1);
-        }
-    }*/
     requestAnimationFrame(tick);
 }

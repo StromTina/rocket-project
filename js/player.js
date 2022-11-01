@@ -1,5 +1,5 @@
 import { Position, Entity } from './entity.js';
-import { BallFromLeft, BallFromRight } from './ball.js';
+import { Ball } from './ball.js';
 
 export class Player extends Entity {
     constructor(position) {
@@ -20,12 +20,12 @@ export class Player extends Entity {
         }
 
         if (this.shotPlayer1 && game.shootTimerPlayer1 > 3) {
-            game.entities.push(new BallFromLeft((new Position(this.position.x + 20, this.position.y)), 5));
+            game.entities.push(new Ball(new Position(this.position.x + 20, this.position.y), 5, false));
             game.entities[0].shotPlayer1 = false;
             game.shootTimerPlayer1 = 0;
         }
         if (this.shotPlayer2 && game.shootTimerPlayer2 > 3) {
-            game.entities.push(new BallFromRight((new Position(this.position.x - 20, this.position.y)), 5));
+            game.entities.push(new Ball(new Position(this.position.x - 20, this.position.y), 5, true));
             game.entities[1].shotPlayer2 = false;
             game.shootTimerPlayer2 = 0;
         }
@@ -56,6 +56,9 @@ export class Player extends Entity {
     }
 
     isColliding(entity) {
+        console.log("ent.pos.x "+ entity.position.x);
+        console.log("this.pos.x "+ this.position.x);
+        
         let cdx = Math.abs(entity.position.x - this.position.x);
         let cdy = Math.abs(entity.position.y - this.position.y);
 
