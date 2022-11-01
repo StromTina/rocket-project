@@ -21,15 +21,12 @@ class Game {
             new Player(new Position(this.canvas.width * 0.75, this.canvas.height - 20))
         ];
         this.balls = [];
-        //this.player1Shot = new ShotFromPlayer1(new Position(this.player1.position.x, this.player1.position.y));
-        //this.player2Shot = new ShotFromPlayer2(new Position(this.player2.position.x, this.player2.position.y));
     }
 
     spawnBall() {
         this.spawnTimer += this.deltaTime;
         if (this.spawnTimer > 0.3) {
             this.spawnTimer = 0;
-            //console.log("spawnTime: " + this.spawnTimer);
             if (trueOrFalse()) {  //maybe make this one nicer
                 if (trueOrFalse()) {
                     this.balls.push(new BallFromLeft((new Position(0, Math.floor(Math.random() * (this.canvas.height - 100)))), 15));
@@ -50,11 +47,10 @@ class Game {
         this.context.font = '48px serif';
         this.context.textAlign = 'center';
         this.context.fillText(this.player1Points, (this.canvas.width / 2) - 100, this.canvas.height - 10);
-
-        this.context.fillStyle = 'white';
-        this.context.font = '48px serif';
-        this.context.textAlign = 'center';
         this.context.fillText(this.player2Points, (this.canvas.width / 2) + 100, this.canvas.height - 10);
+        /*this.context.fillStyle = 'white';
+        this.context.font = '48px serif';
+        this.context.textAlign = 'center';*/    
     }
 }
 
@@ -68,7 +64,7 @@ function tick() {
     lastTime = currentTime;
     game.shootTimerPlayer1 += game.deltaTime;
     game.shootTimerPlayer2 += game.deltaTime;
-    console.log("shootTimerP1: " + game.shootTimerPlayer1);
+    //console.log("shootTimerP1: " + game.shootTimerPlayer1);
     //console.log("shootTimerP2: " + game.shootTimerPlayer2);
 
     game.spawnBall();    //will spawn a ball from right side or left side, at random intervals
@@ -84,15 +80,6 @@ function tick() {
         player.draw(game);
     }
 
-    //game.player1.tick(game);
-    //game.player2.tick(game);
-    //game.player1Shot.tick(game);
-    //game.player2Shot.tick(game);
-    //game.player1.draw(game);
-    //game.player2.draw(game);
-    //game.player1Shot.draw(game);
-    //game.player2Shot.draw(game);
-
     for (let i = 0; i < game.balls.length; i++) {
         let ball = game.balls[i];
         ball.draw(game);
@@ -102,6 +89,5 @@ function tick() {
             game.balls.splice(i, 1);
         }
     }
-
     requestAnimationFrame(tick);
 }

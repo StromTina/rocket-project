@@ -23,12 +23,6 @@ export function handleKeyUp(event) {
         game.players[1].up = false;
     } else if (event.key === 'l') {
         game.players[1].down = false;
-<<<<<<< HEAD
-    } else if (event.key === 'd') {
-        game.players[0].shotPlayer1 = false;
-    } else if (event.key === 'k')
-        game.players[1].shotPlayer2 = false;
-=======
     }
 }
 
@@ -45,5 +39,4 @@ export function keyInput(event){
             game.players[1].shotPlayer2 = true;
         break;
     }
->>>>>>> e9643ce486348a7302f9f856662e3af90d678451
 }
