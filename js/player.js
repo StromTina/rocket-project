@@ -14,6 +14,7 @@ export class Player extends Entity {
 
     tick(game) {
         if (this.up) {
+<<<<<<< HEAD
             this.position.y -= 100 * game.deltaTime;
         } else if (this.down) {
             this.position.y += 100 * game.deltaTime;
@@ -40,6 +41,36 @@ export class Player extends Entity {
             game.player2Points++;
         }
 
+=======
+            this.position.y -= 150 * game.deltaTime;
+        } else if (this.down) {
+            this.position.y += 150 * game.deltaTime;
+        } 
+
+        if (this.shotPlayer1 && game.shootTimerPlayer1 > 3) {
+            game.balls.push(new BallFromLeft((new Position(this.position.x + 20, this.position.y)), 5));
+            game.players[0].shotPlayer1 = false;
+            game.shootTimerPlayer1 = 0;
+        }
+        if (this.shotPlayer2 && game.shootTimerPlayer2 > 3) {
+            game.balls.push(new BallFromRight((new Position(this.position.x - 20, this.position.y)), 5));
+            game.players[1].shotPlayer2 = false;
+            game.shootTimerPlayer2 = 0;
+        }
+
+        if (this.position.y > game.canvas.height - (this.height / 2)) {
+            this.position.y = game.canvas.height - (this.height / 2);
+        }
+
+        if (this.position.x < game.canvas.width / 2 && this.position.y < 0) {
+            this.position = new Position(game.canvas.width * 0.25, game.canvas.height - 20);
+            game.player1Points++;
+        } else if (this.position.x > game.canvas.width / 2 && this.position.y < 0) {
+            this.position = new Position(game.canvas.width * 0.75, game.canvas.height - 20);
+            game.player2Points++;
+        }
+
+>>>>>>> e9643ce486348a7302f9f856662e3af90d678451
         for (let i = 0; i < game.balls.length; i++) {
             let ball = game.balls[i];
 
@@ -50,6 +81,10 @@ export class Player extends Entity {
             }
         }
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> e9643ce486348a7302f9f856662e3af90d678451
 
     isColliding(entity) {
         let cdx = Math.abs(entity.position.x - this.position.x);

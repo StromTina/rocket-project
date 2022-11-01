@@ -12,6 +12,8 @@ class Game {
         this.context = context;
         this.deltaTime = 0;
         this.spawnTimer = 0;
+        this.shootTimerPlayer1 = 0;
+        this.shootTimerPlayer2 = 0;
         this.player1Points = 0;
         this.player2Points = 0;
         this.players = [
@@ -64,6 +66,10 @@ function tick() {
     let currentTime = Date.now();
     game.deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
+    game.shootTimerPlayer1 += game.deltaTime;
+    game.shootTimerPlayer2 += game.deltaTime;
+    console.log("shootTimerP1: " + game.shootTimerPlayer1);
+    //console.log("shootTimerP2: " + game.shootTimerPlayer2);
 
     game.spawnBall();    //will spawn a ball from right side or left side, at random intervals
 
