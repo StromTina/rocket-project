@@ -29,7 +29,6 @@ export function handleKeyUp(event) {
         game.players[1].down = false;
     } else if (event.key === 'd') {
         game.players[0].shotPlayer1 = false;
-    } else if (event.key === 'k') {
+    } else if (event.key === 'k')
         game.players[1].shotPlayer2 = false;
-    }
 }

@@ -4,7 +4,7 @@ import { BallFromLeft, BallFromRight } from './ball.js';
 export class Player extends Entity {
     constructor(position) {
         super(position);
-        this.width = 25;
+        this.width = 28;
         this.height = 45;
         this.up = false;
         this.down = false;
@@ -12,44 +12,44 @@ export class Player extends Entity {
         this.shotPlayer2 = false;
     }
 
-        tick(game) {
-            if (this.up) {
-                this.position.y -= 150 * game.deltaTime;
-            } else if (this.down) {
-                this.position.y += 150 * game.deltaTime;
+    tick(game) {
+        if (this.up) {
+            this.position.y -= 100 * game.deltaTime;
+        } else if (this.down) {
+            this.position.y += 100 * game.deltaTime;
 
-            } else if (this.shotPlayer1) {
-                game.balls.push(new BallFromLeft((new Position(this.position.x + 20, this.position.y)), 5));
-                //game.player1Shot = new ShotFromPlayer1(new Position(this.position.x, this.position.y));
+        } else if (this.shotPlayer1) {
+            game.balls.push(new BallFromLeft((new Position(this.position.x + 20, this.position.y)), 5));
+            
+            //game.player1Shot = new ShotFromPlayer1(new Position(this.position.x, this.position.y));
 
-            } else if (this.shotPlayer2) {
-                game.balls.push(new BallFromRight((new Position(this.position.x - 20, this.position.y)), 5));
-                //game.player2Shot = new ShotFromPlayer2(new Position(this.position.x - 20, this.position.y));
-            }
+        } else if (this.shotPlayer2) {
+            game.balls.push(new BallFromRight((new Position(this.position.x - 20, this.position.y)), 5));
+            //game.player2Shot = new ShotFromPlayer2(new Position(this.position.x - 20, this.position.y));
+        }
 
-            if (this.position.y > game.canvas.height - (this.height / 2)) {
-                this.position.y = game.canvas.height - (this.height / 2);
-            }
+        if (this.position.y > game.canvas.height - (this.height / 2)) {
+            this.position.y = game.canvas.height - (this.height / 2);
+        }
 
-            if (this.position.x < game.canvas.width / 2 && this.position.y < 0) {
+        if (this.position.x < game.canvas.width / 2 && this.position.y < 0) {
+            this.position = new Position(game.canvas.width * 0.25, game.canvas.height - 20);
+            game.player1Points++;
+        } else if (this.position.x > game.canvas.width / 2 && this.position.y < 0) {
+            this.position = new Position(game.canvas.width * 0.75, game.canvas.height - 20);
+            game.player2Points++;
+        }
+
+        for (let i = 0; i < game.balls.length; i++) {
+            let ball = game.balls[i];
+
+            if (this.isColliding(ball) && this.position.x < game.canvas.width / 2) {
                 this.position = new Position(game.canvas.width * 0.25, game.canvas.height - 20);
-                game.player1Points++;
-            } else if (this.position.x > game.canvas.width / 2 && this.position.y < 0) {
+            } else if (this.isColliding(ball) && this.position.x > game.canvas.width / 2) {
                 this.position = new Position(game.canvas.width * 0.75, game.canvas.height - 20);
-                game.player2Points++;
-            }
-
-            for (let i = 0; i < game.balls.length; i++) {
-                let ball = game.balls[i];
-
-                if (this.isColliding(ball) && this.position.x < game.canvas.width / 2) {
-                    this.position = new Position(game.canvas.width * 0.25, game.canvas.height - 20);
-                } else if (this.isColliding(ball) && this.position.x > game.canvas.width / 2) {
-                    this.position = new Position(game.canvas.width * 0.75, game.canvas.height - 20);
-                }
             }
         }
-    
+    }
 
     isColliding(entity) {
         let cdx = Math.abs(entity.position.x - this.position.x);
@@ -66,8 +66,8 @@ export class Player extends Entity {
     }
 
     draw(game) {
-        game.context.fillStyle = 'black';
-        game.context.fillRect(this.position.x - this.width / 2 - 3, this.position.y - this.height / 2 - 10, this.width, this.height);
+        game.context.fillStyle = 'rgba(0, 0, 0, 1)';
+        game.context.fillRect(this.position.x - this.width / 2 - 3, this.position.y - this.height / 2 - 4, this.width, this.height);
         game.context.save();
         game.context.translate(this.position.x, this.position.y);
         game.context.font = '45px serif';
