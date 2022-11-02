@@ -6,10 +6,10 @@ export class Ball extends Entity {
         this.radius = radius;
         this.leftIstrue = leftIstrue;
     }
-
+/*
     setRadius(inRadius) {
         this.radius = inRadius;
-    }
+    }*/
 
     draw(game) {
         game.context.beginPath();

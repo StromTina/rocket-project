@@ -60,8 +60,8 @@ function tick() {
     lastTime = currentTime;
     game.shootTimerPlayer1 += game.deltaTime;
     game.shootTimerPlayer2 += game.deltaTime;
-    //console.log("shootTimerP1: " + game.shootTimerPlayer1);
-    //console.log("shootTimerP2: " + game.shootTimerPlayer2);
+    console.log("shootTimerP1: " + game.shootTimerPlayer1);
+    console.log("shootTimerP2: " + game.shootTimerPlayer2);
 
     game.spawnBall();    //will spawn a ball from right side or left side, at random intervals
 
@@ -74,6 +74,11 @@ function tick() {
         let entity = game.entities[i];
         entity.tick(game);
         entity.draw(game);
+        //console.log(game.entities);
+
+        if (entity.position.x < - 10 || entity.position.x > game.canvas.width + 10) {
+            game.entities.splice(i, 1);
+        }
     }
 
     requestAnimationFrame(tick);
