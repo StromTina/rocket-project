@@ -56,8 +56,6 @@ export class Player extends Entity {
     }
 
     isColliding(entity) {
-        console.log("ent.pos.x "+ entity.position.x);
-        console.log("this.pos.x "+ this.position.x);
         
         let cdx = Math.abs(entity.position.x - this.position.x);
         let cdy = Math.abs(entity.position.y - this.position.y);

@@ -7,10 +7,6 @@ export class Ball extends Entity {
         this.leftIstrue = leftIstrue;
     }
 
-    setRadius(inRadius) {
-        this.radius = inRadius;
-    }
-
     draw(game) {
         game.context.beginPath();
         game.context.fillStyle = 'white';
@@ -36,4 +32,3 @@ export class Ball extends Entity {
         }
     }
 }
-

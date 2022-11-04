@@ -27,16 +27,18 @@ export function handleKeyUp(event) {
 }
 
 export function keyInput(event) {
-    if (event.repeat || game.shootTimerPlayer1 < 3 || game.shootTimerPlayer2 < 3) {
-        console.log("repeatevent");
+    if (event.repeat) {
         return;
     }
-    switch (event.key) {
-        case "d":
-            game.entities[0].shotPlayer1 = true;
-            break;
-        case "k":
-            game.entities[1].shotPlayer2 = true;
-            break;
+
+    if (game.shootTimerPlayer1 > 3 || game.shootTimerPlayer2 > 3) {
+        switch (event.key) {
+            case "d":
+                game.entities[0].shotPlayer1 = true;
+                break;
+            case "k":
+                game.entities[1].shotPlayer2 = true;
+                break;
+        }
     }
 }

@@ -11,6 +11,5 @@ export class Entity {
     }
 
     tick(game) {}
-
     draw(game) {}
 }
